@@ -1,0 +1,9 @@
+---
+- name: Check and restart rsyslog if stopped
+  hosts: rhel9
+  become: true
+  tasks:
+    - name: Ensure rsyslog is running
+      ansible.builtin.systemd:
+        name: rsyslog
+        state: started
