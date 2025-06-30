@@ -10,5 +10,6 @@
     - name: check and restart rsyslog
       condition: event.payload.check == "rsyslog"
       action:
-        run_playbook:
-          name: rsyslog_start.yml
+        run_job_template:
+          name: Start rsyslog
+          organization: Default
