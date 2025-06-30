@@ -1,6 +1,6 @@
 ---
 - name: Check and restart rsyslog if stopped
-  hosts: rhel9
+  hosts: all
   become: true
   tasks:
     - name: Ensure rsyslog is running

@@ -1,0 +1,14 @@
+---
+- name: Monitor rsyslog with webhook
+  hosts: all
+  sources:
+    - name: webhook
+      ansible.eda.webhook:
+        port: 5000
+
+  rules:
+    - name: check and restart rsyslog
+      condition: event.payload.check == "rsyslog"
+      action:
+        run_playbook:
+          name: rsyslog_start.yml
