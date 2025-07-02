@@ -8,7 +8,7 @@
 
   rules:
     - name: check and restart rsyslog
-      condition: event.payload.check == "rsyslog"
+      condition: event.payload.check == "rsyslog" and event.payload.state == "down"
       action:
         run_job_template:
           name: Start rsyslog
