@@ -2,13 +2,13 @@
 - name: Monitor rsyslog with webhook
   hosts: all
   sources:
-    # - name: webhook
-    #   ansible.eda.webhook:
-    #     host: 0.0.0.0
-    #     port: 5000
-    - name: rsyslog_status_check
-      ansible.eda.systemd:
-        name: rsyslog
+    - name: webhook
+      ansible.eda.webhook:
+        # host: 0.0.0.0
+        port: 5000
+    # - name: rsyslog_status_check
+    #   ansible.eda.systemd:
+    #     name: rsyslog
 
   rules:
     - name: check and restart rsyslog
