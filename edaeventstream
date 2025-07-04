@@ -1,0 +1,39 @@
+#!/bin/bash
+# Notify via Red Hat Event Driven Ansible Event Stream
+
+EDA_TOKEN='YOUR TOKEN'
+CUST_HEADERS="Authorization: Bearer $EDA_TOKEN"
+URL="URL FOR YOUR EDA EVENT STREAM"
+EVENT_TYPE="outage"
+EVENT_TITLE="[Triggered] $NOTIFY_SERVICEDESC $NOTIFY_SERVICESTATE"
+MESSAGE="$NOTIFY_SERVICEDESC: $NOTIFY_SERVICESTATE $NOTIFY_SERVICEOUTPUT"
+ALERT_TITLE="$NOTIFY_SERVICEDESC $NOTIFY_SERVICESTATE"
+ALERT_METRIC="0"
+ALERT_STATUS="$NOTIFY_SERVICESTATE"
+EVENT="Something happened"
+USER_ID="1980"
+FIRST_NAME="Christian"
+LAST_NAME="Cruz"
+EMAIL="somemail@gmail.com"
+
+HOSTNAME="$NOTIFY_HOSTNAME"
+
+
+PAYLOAD="{
+    'event': '$EVENT',
+    'message': '$MESSAGE',
+    'user': {
+        'user_id': $USER_ID,
+        'first_name': '$FIRST_NAME',
+        'last_name': '$LAST_NAME',
+        'email': '$EMAIL'
+    },
+    'hostname': '$HOSTNAME', 
+    'event_title': '$EVENT_TITLE' 
+}"
+
+curl -k -v -4 -X POST \
+  "$URL" \
+  -H 'Content-Type: text/json; charset=utf-8' \
+  -H "$CUST_HEADERS" \
+  -d "$PAYLOAD"
