@@ -1,18 +1,18 @@
 ---
-name: Show test message
-hosts: localhost
-gather_facts: no
+- name: Show test message
+  hosts: localhost
+  gather_facts: no
 
-sources:
-  - ansible.eda.webhook:
-      host: 0.0.0.0
-      port: 5000
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
 
-rules:
-  - name: Run a test playbook on CRITICAL status
-    condition: event.payload.status == "CRITICAL"
-    action:
-      run_playbook:
-        name: ../playbooks/test_playbook.yml
-        # extra_vars:
-        #   service_name: "{{ event.payload.service_name }}"
+  rules:
+    - name: Run a test playbook on CRITICAL status
+      condition: event.payload.status == "CRITICAL"
+      action:
+        run_playbook:
+          name: ../playbooks/test_playbook.yml
+          # extra_vars:
+          #   service_name: "{{ event.payload.service_name }}"
